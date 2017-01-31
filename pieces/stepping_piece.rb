@@ -1,10 +1,10 @@
 module SteppingPiece
 
   def moves
-    case move_dir
-    when :king
+    case @symbol
+    when :K
       king_moves
-    when :knight
+    when :N
       knight_moves
     end
   end

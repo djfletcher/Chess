@@ -1,33 +1,17 @@
 module SlidingPiece
 
   def moves
-    case move_dir
-    when :rook
+    case @symbol
+    when :R
       moves = lateral_moves
-    when :bishop
+    when :B
       moves = diagonal_moves
-    when :queen
+    when :Q
       moves = lateral_moves + diagonal_moves
     end
 
     moves
   end
-
-  # def adjust_to_current_position(moves)
-  #   moves = moves.map do |diff|
-  #     [@current_position[0] + diff[0], @current_position[1] + diff[1]]
-  #   end
-  #   moves.delete([0, 0])
-  #   moves.select { |row, col| row.between?(0, 7) && col.between?(0, 7) }
-  # end
-
-  # def add_lateral_movement
-  #   moves = []
-  #   (-7..7).each do |i|
-  #     (-7..7).each { |j| moves << [i, j] if i == 0  || j == 0 }
-  #   end
-  #   moves
-  # end
 
   def add_diagonal_movement
     moves = []
