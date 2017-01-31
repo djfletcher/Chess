@@ -1,4 +1,5 @@
 require_relative 'piece'
+require_relative 'display'
 
 class Board
 
@@ -37,8 +38,25 @@ class Board
     @grid[row][col] = val
   end
 
+  def in_bound?(pos)
+    !self[pos].nil?
+  end
+
+  def each(&prc)
+    @grid.each(&prc)
+  end
+
+  def each_with_index(&prc)
+    @grid.each_with_index(&prc)
+  end
+
   private
 
   attr_reader :grid
 
 end
+
+
+board = Board.new()
+display = Display.new(board)
+display.render
