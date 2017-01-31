@@ -5,7 +5,7 @@ class Board
 
   def initialize
     @grid = Array.new(8) { Array.new(8) }
-    @null_piece = NullPiece.new
+    @null_piece = NullPiece.instance
     populate_board
   end
 
@@ -23,10 +23,11 @@ class Board
 
   #TODO add real pieces
   def move_piece(start_pos, end_pos)
-    raise "No piece at #{start_pos}" if self[start_pos].is_a?(NullPiece)
-    raise "Invalid end position: #{end_pos}" if self[start_pos].valid_move?(start_pos, end_pos)
+    raise "No piece at #{start_pos}" if self[start_pos].is_a?(NullPiece) || !in_bound?(start_pos)
+    raise "Invalid end position: #{end_pos}" unless self[start_pos].valid_moves.include?(end_pos)
     self[end_pos] = self[start_pos]
     self[start_pos] = @null_piece
+    self[end_pos].current_position = end_pos
   end
 
   def [](pos)

@@ -83,13 +83,14 @@ class Cursor
     when :left, :right, :up, :down
       update_pos(MOVE[key])
     when :ctrl_c
-      Process.exit
+      Process.exit(0)
     end
   end
 
   def update_pos(diff)
     possible_position = [@cursor_pos[0] + diff[0] , @cursor_pos[1] + diff[1]]
     @cursor_pos = possible_position if board.in_bound?(possible_position)
+    nil
   end
 
   def toggle_selected

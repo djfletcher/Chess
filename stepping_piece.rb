@@ -1,33 +1,38 @@
 module SteppingPiece
 
-  def moves(piece_type)
-    moves = []
-    case piece_type
+  def moves
+    case move_dir
     when :king
-      moves += king_moves.map do |diff|
-        [@position[0] + diff[0], @position[1] + diff[1]]
-      end
+      king_moves
     when :knight
-      moves += knight_moves.map do |diff|
-       [@position[0] + diff[0], @position[1] + diff[1]]
-      end
+      knight_moves
     end
-    moves.select { |row, col| row.between?(0, 7) && col.between?(0, 7)}
   end
 
   def king_moves
-    moves = []
-      (-1..1).each do |i|
-        (-1..1).each do |j|
-          moves << [i, j]
-        end
+    current_row, current_col = @current_position
+    unobstructed_moves = []
+
+    (-1..1).each do |delta_x|
+      (-1..1).each do |delta_y|
+        next if delta_x == 0 && delta_y == 0
+        row, col = current_row + delta_x, current_col + delta_y
+        piece = @board[[row, col]]
+        unobstructed_moves << [row, col] unless piece.team == @team || piece.nil?
       end
-      moves.delete([0, 0])
-      moves
+    end
+
+    unobstructed_moves
   end
 
   def knight_moves
-    [[-2 , -1],[-1, -2],[-2 ,1],[1, -2],[2,-1],[-1, 2],[2, 1],[1, 2]]
+    deltas = [[-2 , -1],[-1, -2],[-2 ,1],[1, -2],[2,-1],[-1, 2],[2, 1],[1, 2]]
+    current_row, current_col = @current_position
+    unobstructed_moves = deltas.map do |delta|
+      [current_row + delta[0] , current_col + delta[1]]
+    end
+
+    unobstructed_moves.reject { |pos| @board[pos].team == @team || @board[pos].nil?}
   end
 
 
