@@ -43,6 +43,7 @@ class Cursor
   def get_input
     key = KEYMAP[read_char]
     handle_key(key)
+    cursor_pos
   end
 
   private
