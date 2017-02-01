@@ -3,7 +3,7 @@
 class Piece
 
   attr_accessor :current_position
-  attr_reader  :team
+  attr_reader  :team, :board
 
   def initialize(board, team, pos)
     @current_position = pos

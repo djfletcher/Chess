@@ -10,6 +10,7 @@ module SteppingPiece
   end
 
   def king_moves
+
     current_row, current_col = @current_position
     unobstructed_moves = []
 
@@ -17,6 +18,7 @@ module SteppingPiece
       (-1..1).each do |delta_y|
         next if delta_x == 0 && delta_y == 0
         row, col = current_row + delta_x, current_col + delta_y
+        next if !(0..7).include?(row)
         piece = @board[[row, col]]
         unobstructed_moves << [row, col] unless piece.team == @team || piece.nil?
       end
@@ -32,7 +34,7 @@ module SteppingPiece
       [current_row + delta[0] , current_col + delta[1]]
     end
 
-    unobstructed_moves.reject { |pos| @board[pos].team == @team || @board[pos].nil?}
+    unobstructed_moves.reject { |pos| !@board.in_bound?(pos) || @board[pos].team == @team}
   end
 
 

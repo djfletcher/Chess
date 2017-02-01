@@ -24,29 +24,31 @@ module SlidingPiece
     unobstructed_moves = []
 
     (current_row - 1).downto(0) do |row|
+      break if !(0..7).include?(row)
       piece = @board[[row, current_col]]
-      break if piece.team == @team || piece.nil?
+      break if piece.nil? || piece.team == @team
       unobstructed_moves << [row, current_col]
       break unless piece.is_a?(NullPiece)
     end
 
     (current_row + 1).upto(7) do |row|
+      break if !(0..7).include?(row)
       piece = @board[[row, current_col]]
-      break if piece.team == @team || piece.nil?
+      break if piece.nil? || piece.team == @team
       unobstructed_moves << [row, current_col]
       break unless piece.is_a?(NullPiece)
     end
 
     (current_col - 1).downto(0) do |col|
       piece = @board[[current_row, col]]
-      break if piece.team == @team || piece.nil?
+      break if piece.nil? || piece.team == @team
       unobstructed_moves << [current_row, col]
       break unless piece.is_a?(NullPiece)
     end
 
     (current_row + 1).upto(7) do |col|
       piece = @board[[current_row, col]]
-      break if piece.team == @team || piece.nil?
+      break if piece.nil? || piece.team == @team
       unobstructed_moves << [current_row, col]
       break unless piece.is_a?(NullPiece)
     end
@@ -60,32 +62,36 @@ module SlidingPiece
 
     (1..7).each do |i|
       row, col = current_row + i, current_col + i
+      break if !(0..7).include?(row)
       piece = @board[[row, col]]
-      break if piece.team == @team || piece.nil?
+      break if piece.nil? || piece.team == @team
       unobstructed_moves << [row, col]
       break unless piece.is_a?(NullPiece)
     end
 
     (1..7).each do |i|
       row, col = current_row - i, current_col - i
+      break if !(0..7).include?(row)
       piece = @board[[row, col]]
-      break if piece.team == @team || piece.nil?
+      break if piece.nil? || piece.team == @team
       unobstructed_moves << [row, col]
       break unless piece.is_a?(NullPiece)
     end
 
     (1..7).each do |i|
       row, col = current_row + i, current_col - i
+      break if !(0..7).include?(row)
       piece = @board[[row, col]]
-      break if piece.team == @team || piece.nil?
+      break if piece.nil? || piece.team == @team
       unobstructed_moves << [row, col]
       break unless piece.is_a?(NullPiece)
     end
 
     (1..7).each do |i|
       row, col = current_row - i, current_col + i
+      break if !(0..7).include?(row)
       piece = @board[[row, col]]
-      break if piece.team == @team || piece.nil?
+      break if piece.nil? || piece.team == @team
       unobstructed_moves << [row, col]
       break unless piece.is_a?(NullPiece)
     end

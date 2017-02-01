@@ -68,13 +68,13 @@ class Board
     [@null_piece] * 8
   end
 
-  #TODO add real pieces
   def move_piece(start_pos, end_pos)
-    raise "No piece at #{start_pos}" if self[start_pos].is_a?(NullPiece) || !in_bound?(start_pos)
-    raise "Invalid end position: #{end_pos}" unless self[start_pos].valid_moves.include?(end_pos)
+    raise ArgumentError, "No piece at #{start_pos}" if self[start_pos].is_a?(NullPiece) || !in_bound?(start_pos)
+    raise ArgumentError, "Invalid end position: #{end_pos}" unless self[start_pos].moves.include?(end_pos)
     self[end_pos] = self[start_pos]
     self[start_pos] = @null_piece
     self[end_pos].current_position = end_pos
+    true
   end
 
   def [](pos)
@@ -88,7 +88,7 @@ class Board
   end
 
   def in_bound?(pos)
-    !self[pos].nil?
+    pos[0].between?(0,7) && pos[1].between?(0,7)
   end
 
   def each(&prc)
@@ -138,8 +138,3 @@ class Board
   attr_reader :grid
 
 end
-
-
-board = Board.new()
-display = Display.new(board)
-display.render
