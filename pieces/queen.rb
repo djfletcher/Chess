@@ -6,6 +6,12 @@ class Queen < Piece
 
   def initialize(board, team, pos)
     @symbol = :Q
+    case team
+    when :white
+      @unicode_string = ''
+    when :black
+      @unicode_string = ''
+    end
     super
   end
 

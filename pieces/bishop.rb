@@ -7,6 +7,12 @@ class Bishop < Piece
 
  def initialize(board, team, pos)
    @symbol = :B
+   case team
+   when :white
+     @unicode_string = ''
+   when :black
+     @unicode_string = ''
+   end
    super
  end
 

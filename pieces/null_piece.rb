@@ -6,6 +6,7 @@ class NullPiece < Piece
 
   def initialize
     @symbol = ' '
+    @unicode_string = ' '
   end
 
   def display

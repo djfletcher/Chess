@@ -21,7 +21,7 @@ class Piece
   end
 
   def display
-    @symbol
+    @unicode_string.gsub(/\\u[\da-f]{4}/i) { |m| [m[-4..-1].to_i(16)].pack('U') }
   end
 
 end

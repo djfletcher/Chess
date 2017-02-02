@@ -6,6 +6,12 @@ class Knight < Piece
 
   def initialize(board, team, pos)
     @symbol = :N
+    case team
+    when :white
+      @unicode_string = ''
+    when :black
+      @unicode_string = ''
+    end
     super
   end
 

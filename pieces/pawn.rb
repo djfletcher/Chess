@@ -4,6 +4,12 @@ class Pawn < Piece
 
   def initialize(board, team, pos)
     @symbol = :p
+    case team
+    when :white
+      @unicode_string = ''
+    when :black
+      @unicode_string = ''
+    end
     super
   end
 

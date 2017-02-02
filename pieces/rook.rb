@@ -6,6 +6,12 @@ class Rook < Piece
 
   def initialize(board, team, pos)
     @symbol = :R
+    case team
+    when :white
+      @unicode_string = ''
+    when :black
+      @unicode_string = ''
+    end
     super
   end
 
